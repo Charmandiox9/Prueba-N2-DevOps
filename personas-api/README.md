@@ -54,3 +54,7 @@ npm run start:prod     # corre la version compilada: node dist/main
   y que el runtime stack al crear el App Service sea Linux + Node 20.
 - El workflow `azure-deploy.yml` ya compila (`npm run build`) antes de
   desplegar, asi que `dist/` llega listo al servidor.
+
+
+
+aaa
