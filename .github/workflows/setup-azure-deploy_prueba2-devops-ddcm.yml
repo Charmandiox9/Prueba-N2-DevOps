@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - prueba2-devops-ddcm
 on:
   push:
     branches:
-      - setup-azure-deploy
+      - main
   workflow_dispatch:
 
 jobs:
