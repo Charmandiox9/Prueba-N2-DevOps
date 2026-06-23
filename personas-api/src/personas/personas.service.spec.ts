@@ -12,6 +12,22 @@ describe('PersonasService', () => {
     expect(service.findAll()).toEqual([]);
   });
 
+  it('agrega una persona con gustos', () => {
+    const persona = service.create({
+      nombre: 'Ana Perez',
+      rut: '12345678-9',
+      fechaNacimiento: '1990-05-10',
+      ciudad: 'Santiago',
+      gustos: ['empanadas', 'ajedrez'],
+    });
+    expect(persona).toMatchObject({
+      nombre: 'Ana Perez',
+      rut: '12345678-9',
+      gustos: ['empanadas', 'ajedrez'],
+    });
+    expect(service.findAll()).toHaveLength(1);
+  });
+
   it('agrega una persona sin gustos y deja la lista vacia', () => {
     const persona = service.create({
       nombre: 'Pedro Diaz',
@@ -19,7 +35,7 @@ describe('PersonasService', () => {
       fechaNacimiento: '1995-07-07',
       ciudad: 'Temuco',
     });
-    expect(persona.rut).toEqual('33333333-3');
+    expect(persona.gustos).toEqual([]);
   });
 
   it('lanza ConflictException si el rut ya existe', () => {

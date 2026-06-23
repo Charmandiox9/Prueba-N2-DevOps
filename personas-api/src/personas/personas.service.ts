@@ -24,6 +24,7 @@ export class PersonasService {
       rut: dto.rut,
       fechaNacimiento: dto.fechaNacimiento,
       ciudad: dto.ciudad,
+      gustos: dto.gustos ?? [],
     };
     this.personas.push(persona);
     return persona;
