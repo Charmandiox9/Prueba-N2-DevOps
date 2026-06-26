@@ -1,6 +1,12 @@
-# personas-api-nest
+# Personas API
 
-Misma API de personas (almacenamiento en memoria), reescrita con **NestJS**.
+API de personas en **NestJS**.
+
+## Integrantes
+
+- Clerians Márquez | 20.717.942-6
+- Daniel Durán | 21.493.398-5
+
 
 ## Estructura
 
@@ -12,11 +18,11 @@ personas-api/
     personas/
       dto/create-persona.dto.ts   # validacion con class-validator
       persona.interface.ts
-      personas.controller.ts      # GET /personas, POST /personas, DELETE /personas/:rut
-      personas.service.ts         # almacenamiento en memoria (arreglo)
+      personas.controller.ts      # endpoints
+      personas.service.ts         # servicios
       personas.service.spec.ts    # pruebas unitarias del service
   test/
-    app.e2e-spec.ts               # pruebas e2e: flujo POST -> GET -> DELETE -> GET
+    app.e2e-spec.ts               -> GET
   Dockerfile                      # imagen de produccion multi-stage
 docker-compose.yaml             # orquestacion de 3 servicios
 example.env                     # variables de entorno de ejemplo
@@ -46,8 +52,7 @@ cd personas-api
 npm install
 npm run start:dev     # desarrollo, con recarga automatica
 npm test               # pruebas unitarias (Jest)
-npm run test:e2e       # pruebas end-to-end (Jest + Supertest sobre la app real)
-npm run build           # compila a /dist (necesario antes de desplegar)
+npm run build           # compila a /dist
 npm run start:prod     # corre la version compilada: node dist/main
 ```
 ## Docker
@@ -108,15 +113,3 @@ La tabla `personas` se crea automáticamente al iniciar la app (TypeORM `synchro
 ```bash
 docker compose down
 ```
-
-## Notas para Azure App Service
-
-- Azure ejecuta por defecto `npm install` y luego `npm start`. El script
-  `start` de Nest (`nest start`) **no** es apto para produccion.
-- Configura en el portal: **App Service -> Configuration -> General settings
-  -> Startup Command** -> `npm run start:prod` (o `node dist/main.js`).
-- Asegurate de que la version de Node del App Service coincida (Node 20 LTS),
-  y que el runtime stack al crear el App Service sea Linux + Node 20.
-- El workflow `azure-deploy.yml` ya compila (`npm run build`) antes de
-  desplegar, asi que `dist/` llega listo al servidor.
-
